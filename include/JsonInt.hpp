@@ -8,7 +8,7 @@ namespace CppJson
     class JsonInt : public ValueBase{
         public:
             JsonInt(const Int_t val = 0);
-            JsonInt(const int val = 0);
+            JsonInt(const int val);
             ~JsonInt() override;
             std::unique_ptr<ValueBase> clone() const  override;
 

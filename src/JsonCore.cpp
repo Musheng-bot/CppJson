@@ -9,19 +9,19 @@ namespace CppJson{
     std::ostream &operator<<(std::ostream &out, const CppJson::Value &value)
     {
         if (value.isNull()){
-            out << "null";
+            out << "null ";
         }
         else if (value.isBool()){
-            out << ( value.asBool().toStdBool() ? "true" : "false");
+            out << ( value.asBool().toStdBool() ? "true " : "false ");
         }
         else if (value.isFloat()){
-            out << value.asFloat().toStdFloat();
+            out << value.asFloat().toStdFloat() << ' ';
         }
         else if (value.isInt()){
-            out << value.asInt().toStdInt();
+            out << value.asInt().toStdInt() << ' ';
         }
         else if (value.isString()){
-            out << '\"' << value.asString().toStdString() << '\"';
+            out << '\"' << value.asString().toStdString() << '\"' << ' ';
         }
         else if (value.isArray()){
             const CppJson::Array_t &vec = value.asArray().toStdVector();
@@ -32,11 +32,11 @@ namespace CppJson{
                     out << val;
                 }
                 else{
-                    out << ',' << val;
+                    out << ',' << ' ' << val;
                 }
                 ++i;
             }
-            out << ']';
+            out << ']' << ' ';
         }
         else if (value.isObject()){
             const CppJson::Object_t &m = value.asObject().toStdMap();
@@ -47,7 +47,7 @@ namespace CppJson{
                     out << '\"' << pair.first.asString().toStdString() << '\"' << " : " << pair.second;
                 }
                 else{
-                    out << ',' << ' ' << '\"' << pair.first.asString().toStdString() << '\"' << " : " << pair.second;
+                    out << ',' << ' ' << '\"' << pair.first.asString().toStdString() << '\"' << " : " << pair.second << ' ';
                 }
                 ++i;
             }
