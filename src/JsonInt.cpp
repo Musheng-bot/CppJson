@@ -5,6 +5,10 @@ namespace CppJson
     JsonInt::JsonInt(const Int_t val):
         val_(val)
     {}
+    JsonInt::JsonInt(const int val):
+        val_(static_cast<Int_t>(val))
+    {
+    }
     JsonInt::~JsonInt() = default;
     std::unique_ptr<ValueBase> JsonInt::clone() const
     {
@@ -17,5 +21,9 @@ namespace CppJson
     const JsonInt &JsonInt::asInt() const
     {
         return *this;
+    }
+    const Int_t JsonInt::toStdInt() const
+    {
+        return val_;
     }
 } // namespace CppJson

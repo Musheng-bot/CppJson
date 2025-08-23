@@ -1,5 +1,5 @@
-#ifndef JSONERROR_HPP
-#define JSONERROR_HPP
+#ifndef JSON_ERROR_HPP
+#define JSON_ERROR_HPP
 
 #include <stdexcept>
 

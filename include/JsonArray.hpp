@@ -6,7 +6,7 @@
 namespace CppJson{
     class JsonArray : public ValueBase{
         public:
-            JsonArray(const Array_t &val);
+            JsonArray(const Array_t &val = Array_t());
             ~JsonArray() override;
 
             std::unique_ptr<ValueBase> clone() const override;
@@ -15,7 +15,8 @@ namespace CppJson{
 
             Value &operator[](const Index_t index);
             const Value &operator[](const Index_t index) const;
-
+            const std::vector<Value> &toStdVector() const;
+            std::vector<Value> &toStdVector();
         private:
             Array_t val_;
     };

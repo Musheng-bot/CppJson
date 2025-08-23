@@ -21,3 +21,8 @@ const CppJson::JsonBool &CppJson::JsonBool::asBool() const
 {
     return *this;
 }
+
+const bool CppJson::JsonBool::toStdBool() const
+{
+    return val_;
+}

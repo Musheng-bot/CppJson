@@ -21,3 +21,8 @@ const CppJson::JsonFloat &CppJson::JsonFloat::asFloat() const
 {
     return *this;   
 }
+
+const CppJson::Float_t CppJson::JsonFloat::toStdFloat() const
+{
+    return val_;
+}

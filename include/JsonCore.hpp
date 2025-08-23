@@ -6,9 +6,11 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <iostream>
 
 namespace CppJson{
     class Value;
+    class ValueBase;
     class JsonNull;
     class JsonBool;
     class JsonInt;
@@ -17,24 +19,71 @@ namespace CppJson{
     class JsonArray;
     class JsonObject;
 
-    using Key_t = JsonString;
     using Bool_t = bool;
     using Float_t = _Float64;
     using Int_t = int64_t;
     using String_t = std::string;
     using Array_t = std::vector<Value>;
+    using Key_t = JsonString;
     using Object_t = std::map<Key_t, Value>;
     using Index_t = unsigned long long;
-    
+
+    class Value{
+        public:
+            Value();
+            ~Value();
+            Value(const int val);
+            Value(const Bool_t val);
+            Value(const Int_t val);
+            Value(const Float_t val);
+            Value(const String_t &val);
+            Value(const char *val);
+            Value(const Array_t &val);
+            Value(const Object_t &val);
+            Value(const Value &other);
+            Value &operator=(const Value &other);
+            Value(Value &&other);
+            Value &operator=(Value &&other);
+
+            bool isNull() const;
+            bool isBool() const;
+            bool isInt() const;
+            bool isFloat() const;
+            bool isString() const;
+            bool isArray() const;
+            bool isObject() const;
+
+            const JsonNull &asNull() const;
+            const JsonBool &asBool() const;
+            const JsonInt &asInt() const;
+            const JsonFloat &asFloat() const;
+            const JsonArray &asArray() const;
+            const JsonString &asString() const;
+            const JsonObject &asObject() const;
+
+            JsonNull &asNull();
+            JsonBool &asBool();
+            JsonInt &asInt();
+            JsonFloat &asFloat();
+            JsonString &asString();
+            JsonArray &asArray();
+            JsonObject &asObject();
+            std::unique_ptr<ValueBase> clone() const;
+
+            friend std::ostream &operator<<(std::ostream &out, const Value &value);
+
+        private:
+            std::unique_ptr<ValueBase> val_;
+    };
 
     class ValueBase{
         public:
             ValueBase() = default;
             virtual ~ValueBase() = default;
-            ValueBase(const ValueBase &) = delete;
-            ValueBase &operator=(const ValueBase &) = delete;
-            ValueBase(ValueBase &&) = delete;
-            ValueBase &operator=(ValueBase &&) = delete;
+            ValueBase(const ValueBase &) = default;
+            ValueBase &operator=(const ValueBase &) = default;
+            ValueBase(ValueBase &&) = default;
+            ValueBase &operator=(ValueBase &&) = default;
 
             virtual std::unique_ptr<ValueBase> clone() const = 0;
 
@@ -54,15 +103,15 @@ namespace CppJson{
             virtual const JsonString &asString() const { throw TypeError("Invalid type : not String"); }
             virtual const JsonObject &asObject() const { throw TypeError("Invalid type : not Object"); }
 
-            JsonNull &asNull() {return const_cast<JsonNull &>(static_cast<const ValueBase &>(*this).asNull()); }
-            JsonBool &asBool() { return const_cast<JsonBool &>(static_cast<const ValueBase &>(*this).asBool()); }
-            JsonInt &asInt() {return const_cast<JsonInt &>(static_cast<const ValueBase &>(*this).asInt()); }
-            JsonFloat &asFloat() { return const_cast<JsonFloat &>(static_cast<const ValueBase &>(*this).asFloat()); }
-            JsonString &asString() { return const_cast<JsonString &>(static_cast<const ValueBase &>(*this).asString()); }
-            JsonArray &asArray() { return const_cast<JsonArray &>(static_cast<const ValueBase &>(*this).asArray()); }
-            JsonObject &asObject() { return const_cast<JsonObject &>(static_cast<const ValueBase &>(*this).asObject()); }
+            JsonNull &asNull() {return const_cast<JsonNull &>(static_cast<const ValueBase *>(this)->asNull()); }
+            JsonBool &asBool() { return const_cast<JsonBool &>(static_cast<const ValueBase *>(this)->asBool()); }
+            JsonInt &asInt() {return const_cast<JsonInt &>(static_cast<const ValueBase *>(this)->asInt()); }
+            JsonFloat &asFloat() { return const_cast<JsonFloat &>(static_cast<const ValueBase *>(this)->asFloat()); }
+            JsonString &asString() { return const_cast<JsonString &>(static_cast<const ValueBase *>(this)->asString()); }
+            JsonArray &asArray() { return const_cast<JsonArray &>(static_cast<const ValueBase *>(this)->asArray()); }
+            JsonObject &asObject() { return const_cast<JsonObject &>(static_cast<const ValueBase *>(this)->asObject()); }
     };
 
 }
 
-#endif //JSON_CORE_HPP
+#endif
