@@ -25,6 +25,7 @@ namespace CppJson{
             const Token &nextToken() const;
             void error(const std::string &message);
             void advance();
+            void resetTokens(const std::vector<Token> &tokens);
         
         private:
             std::vector<Token> tokens_;

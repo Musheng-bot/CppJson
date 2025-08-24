@@ -62,8 +62,10 @@ namespace CppJson{
         cur_pos_(0)
     {
     }
-    void JsonLexer::reset(){
+    void JsonLexer::reset(const std::string &str){
+        this->json_ = str;
         cur_pos_ = 0;
+        length_ = this->json_.size();
         parsed_tokens_.clear();
     }
     const std::vector<Token> &JsonLexer::parseJson()

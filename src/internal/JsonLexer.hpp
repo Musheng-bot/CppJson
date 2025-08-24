@@ -10,7 +10,7 @@ namespace CppJson{
             using pos_t = unsigned long long;
         public:
             explicit JsonLexer(const std::string &str);
-            void reset();
+            void reset(const std::string &str);
             const std::vector<Token> &parseJson();
             Token parseString();
             Token parseNum();

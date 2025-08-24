@@ -37,6 +37,22 @@ CppJson::Value &CppJson::JsonObject::operator[](const Key_t &key)
     return this->val_[key];
 }
 
+const CppJson::Value &CppJson::JsonObject::operator[](const char *key) const{
+    return (*this)[JsonString(key)];
+}
+
+const CppJson::Value &CppJson::JsonObject::operator[](const std::string &key) const{
+    return (*this)[JsonString(key)];
+}
+
+CppJson::Value &CppJson::JsonObject::operator[](const char *key){
+    return (*this)[JsonString(key)];
+}
+
+CppJson::Value &CppJson::JsonObject::operator[](const std::string &key){
+    return (*this)[JsonString(key)];
+}
+
 const CppJson::Object_t &CppJson::JsonObject::toStdMap() const
 {
     return this->val_;

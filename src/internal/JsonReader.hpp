@@ -7,10 +7,9 @@
 
 namespace CppJson
 {
-    class JsonReader
-    {
-    public:
-        std::string readFromFile(const std::string &file_name);
+    class JsonReader{
+        public:
+            std::string readFromFile(const std::string &file_name);
     };
 } // namespace CppJson
 

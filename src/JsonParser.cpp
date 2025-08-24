@@ -37,10 +37,17 @@ namespace CppJson{
         // this->advance(); //Skip the '{' token.
         Token token = this->currentToken();
         JsonObject object;
+        Token next_token = this->nextToken();
+        if (next_token.isJsonSymbol() && token.toJsonSymbol() == JSON_OBJECT_END){
+            this->advance();
+            this->advance();
+            return object;
+        }
         while (!((token.isJsonSymbol() && token.toJsonSymbol() == JSON_OBJECT_END) || (token.isJsonSymbol() && token.toJsonSymbol() == JSON_PARSE_END))){
             this->advance();
             this->parseObjectItem(object);
             token = this->currentToken();
+            next_token = this->nextToken();
         }
         //出来时，应该定位在'}'处
         this->advance();
@@ -77,6 +84,12 @@ namespace CppJson{
         // this->advance(); //Skip the '[' token.
         Token token = this->currentToken();
         JsonArray array;
+        auto next_token = this->nextToken();
+        if (next_token.isJsonSymbol() && next_token.toJsonSymbol() == JSON_ARRAY_END){
+            this->advance();
+            this->advance();
+            return array;
+        }
         while (!((token.isJsonSymbol() && token.toJsonSymbol() == JSON_ARRAY_END) || (token.isJsonSymbol() && token.toJsonSymbol() == JSON_PARSE_END))){
             this->advance();
             this->parseArrayItem(array);
@@ -121,6 +134,12 @@ namespace CppJson{
         if (cur_pos_ < length_){
             ++cur_pos_;
         }
+    }
+
+    void JsonParser::resetTokens(const std::vector<Token> &tokens){
+        this->tokens_ = tokens;
+        this->cur_pos_ = 0;
+        this->length_ = this->tokens_.size();
     }
 
     JsonNull JsonParser::parseNull(){

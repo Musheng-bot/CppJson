@@ -17,6 +17,11 @@ namespace CppJson
 
             const Value &operator[](const Key_t &key) const;    
             Value &operator[](const Key_t &key);
+            const Value &operator[](const char *key) const;
+            const Value &operator[](const std::string &key) const;
+            Value &operator[](const char *key);
+            Value &operator[](const std::string &key);
+
             const Object_t &toStdMap() const;
             Object_t &toStdMap();
 
