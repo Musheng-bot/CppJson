@@ -14,9 +14,12 @@ namespace CppJson{
             const JsonArray &asArray() const override;
 
             Value &operator[](const Index_t index);
+            void emplaceBack(const Value &value);
             const Value &operator[](const Index_t index) const;
             const std::vector<Value> &toStdVector() const;
             std::vector<Value> &toStdVector();
+
+            Value toValue() const override;
         private:
             Array_t val_;
     };

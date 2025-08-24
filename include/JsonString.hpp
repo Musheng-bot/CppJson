@@ -20,6 +20,7 @@ namespace CppJson
             const String_t &toStdString() const;
             String_t &toStdString(); 
 
+            Value toValue() const override;
         private:
             String_t val_;
     };

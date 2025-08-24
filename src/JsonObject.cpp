@@ -45,3 +45,7 @@ const CppJson::Object_t &CppJson::JsonObject::toStdMap() const
 CppJson::Object_t &CppJson::JsonObject::toStdMap(){
     return const_cast<Object_t &>(static_cast<const JsonObject *>(this)->toStdMap());
 }
+
+CppJson::Value CppJson::JsonObject::toValue() const{
+    return Value(this->toStdMap());
+}

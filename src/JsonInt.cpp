@@ -26,4 +26,7 @@ namespace CppJson
     {
         return val_;
     }
+    Value JsonInt::toValue() const {
+        return Value(this->toStdInt());
+    }
 } // namespace CppJson

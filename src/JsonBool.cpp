@@ -26,3 +26,7 @@ const bool CppJson::JsonBool::toStdBool() const
 {
     return val_;
 }
+
+CppJson::Value CppJson::JsonBool::toValue() const{
+    return Value(this->toStdBool());
+}

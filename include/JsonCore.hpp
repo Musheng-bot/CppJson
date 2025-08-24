@@ -110,6 +110,8 @@ namespace CppJson{
             JsonString &asString() { return const_cast<JsonString &>(static_cast<const ValueBase *>(this)->asString()); }
             JsonArray &asArray() { return const_cast<JsonArray &>(static_cast<const ValueBase *>(this)->asArray()); }
             JsonObject &asObject() { return const_cast<JsonObject &>(static_cast<const ValueBase *>(this)->asObject()); }
+
+            virtual Value toValue() const { throw TypeError("Unable to transform to value");};
     };
 
 }

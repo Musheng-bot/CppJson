@@ -14,6 +14,8 @@ namespace CppJson
             bool isFloat() const override;
             const JsonFloat &asFloat() const override;
             const Float_t toStdFloat() const;
+
+            Value toValue() const override;
         private:
             Float_t val_;
     };

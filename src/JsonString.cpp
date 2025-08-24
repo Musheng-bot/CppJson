@@ -47,4 +47,6 @@ CppJson::String_t &CppJson::JsonString::toStdString()
     return this->val_;
 }
 
-
+CppJson::Value CppJson::JsonString::toValue() const{
+    return Value(this->toStdString());
+}

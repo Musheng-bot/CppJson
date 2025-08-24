@@ -20,6 +20,7 @@ namespace CppJson
             const Object_t &toStdMap() const;
             Object_t &toStdMap();
 
+            Value toValue() const override;
         private:
             Object_t val_;
     };

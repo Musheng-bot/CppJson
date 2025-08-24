@@ -28,6 +28,10 @@ CppJson::Value &CppJson::JsonArray::operator[](const Index_t index)
     return const_cast<Value &>(static_cast<const JsonArray &>(*this)[index]);
 }
 
+void CppJson::JsonArray::emplaceBack(const Value &value){
+    this->val_.emplace_back(value);
+}
+
 const CppJson::Value &CppJson::JsonArray::operator[](const Index_t index) const
 {
     return this->val_[index];
@@ -41,4 +45,8 @@ const std::vector<CppJson::Value> &CppJson::JsonArray::toStdVector() const
 std::vector<CppJson::Value> &CppJson::JsonArray::toStdVector()
 {
     return const_cast<std::vector<Value> &>(static_cast<const JsonArray &>(*this).toStdVector());
+}
+
+CppJson::Value CppJson::JsonArray::toValue() const{
+    return Value(this->toStdVector());
 }

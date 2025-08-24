@@ -34,7 +34,7 @@ namespace CppJson{
     }
     JsonString Token::toJsonString() const
     {
-        if(type() == JsonType::String){
+        if(type() != JsonType::String){
             throw TypeError("Not String");
         }
         return value_.asString();

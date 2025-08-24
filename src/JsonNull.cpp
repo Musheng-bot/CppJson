@@ -19,3 +19,7 @@ const CppJson::JsonNull &CppJson::JsonNull::asNull() const
 {
     return *this;
 }
+
+CppJson::Value CppJson::JsonNull::toValue() const{
+    return Value();
+}

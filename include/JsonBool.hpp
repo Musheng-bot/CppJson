@@ -16,7 +16,7 @@ namespace CppJson
             const JsonBool &asBool() const override;
 
             const bool toStdBool() const;
-        
+            Value toValue() const override;
         private:
             bool val_;
     };

@@ -26,3 +26,8 @@ const CppJson::Float_t CppJson::JsonFloat::toStdFloat() const
 {
     return val_;
 }
+
+CppJson::Value CppJson::JsonFloat::toValue() const
+{
+    return Value(this->toStdFloat());
+}

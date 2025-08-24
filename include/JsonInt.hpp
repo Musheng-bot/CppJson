@@ -15,6 +15,8 @@ namespace CppJson
             bool isInt() const override;
             const JsonInt &asInt() const override;
             const Int_t toStdInt() const;
+
+            Value toValue() const override;
         private:
             Int_t val_;
     };

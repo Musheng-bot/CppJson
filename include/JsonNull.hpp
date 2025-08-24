@@ -13,6 +13,8 @@ namespace CppJson
 
             bool isNull() const override;
             const JsonNull &asNull() const override;
+
+            Value toValue() const override;
     };
 } // namespace CppJson
 
